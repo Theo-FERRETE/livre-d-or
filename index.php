@@ -1,22 +1,17 @@
 <?php
-session_start();
 require 'config.php';
 
-// Récupérer les commentaires avec le prénom des utilisateurs
-$comment = $pdo->query("
-    SELECT c.comment, u.prenom, c.date 
-    FROM comment c 
-    JOIN `user` u ON c.id_user = u.id 
-    ORDER BY c.date DESC
-")->fetchAll();
+// Récupérer les commentaires
+$stmt = $pdo->query("SELECT comment.*, user.prenom, user.nom FROM comment JOIN user ON comment.id_user = user.id ORDER BY comment.date DESC");
+$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livre d'Or</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -25,48 +20,74 @@ $comment = $pdo->query("
         </div>
         <div class="login-button">
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="logout.php">Déconnexion</a>
+                <a href="logout.php" class="logout-btn">Déconnexion</a>
             <?php else: ?>
-                <a href="auth.php">Connexion</a>
+                <a href="#" class="login-btn">Connexion</a>
             <?php endif; ?>
         </div>
     </header>
+
     <div class="container">
-        <!-- Zone des commentaires -->
-        <aside class="sidebar-container">
-            <h2>Avis et commentaires</h2>
-        
+        <!-- Slideshow -->
+        <div class="slideshow-container">
+            <img src="./assets/img/mariage3.jpeg" alt="Image 1">
+            <img src="assets/img/mariage4.jpeg" alt="Image 2">
+            <img src="./assets/img/mariage5.jpg" alt="Image 3">
+            <img src="./assets/img/mariage6.jpeg" alt="Image 4">
+            <img src="./assets/img/mariage7.jpeg" alt="Image 5">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+
+        <!-- Barre latérale des commentaires -->
+        <div class="sidebar-container">
+            <h2>Commentaires</h2>
             <ul>
-                <?php foreach ($comment as $c): ?>
+                <?php foreach ($comments as $comment): ?>
                     <li>
-                        <strong><?= htmlspecialchars($c['prenom']) ?></strong> (<?= $c['date'] ?>) : <br><?= htmlspecialchars($c['comment']) ?>
+                        <strong><?= htmlspecialchars($comment['prenom']) ?> <?= htmlspecialchars($comment['nom']) ?></strong>
+                        <p><?= htmlspecialchars($comment['comment']) ?></p>
+                        <small><?= $comment['date'] ?></small>
                     </li>
                 <?php endforeach; ?>
             </ul>
-            <?php if (isset($_SESSION['user'])): ?>
-                <a href="commentaires.php">Ajouter un commentaire</a>
-            <?php else: ?>
-                <p>Veuillez vous <a href="auth.php">connecter</a> pour ajouter un commentaire.</p>
-            <?php endif; ?>
-        </aside>
-        <div class="slideshow-container">
-            <img src="./assets/img/mariage2.jpeg" alt="">
-            <img src="./assets/img/mariage3.jpeg" alt="">
-            <img src="./assets/img/mariage4.jpeg" alt="">
-            <img src="./assets/img/mariage5.jpeg" alt="">
-            <img src="./assets/img/mariage6.jpeg" alt="">
-            <img src="./assets/img/mariage7.jpeg" alt="">
-            <button id="prev">&#10094;</button>
-            <button id="next">&#10095;</button>
+            <a href="commentaires.php">Ajouter un commentaire</a>
         </div>
     </div>
-    <script src="./js/script.js"></script>
-    <script src="./js/slideshow.js"></script>
-<footer>
-    <p>&copy; 2023 Livre d'Or</p>
-</footer>
 
+    <!-- Modal de connexion et d'inscription -->
+    <div class="modal login-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'Login')" id="defaultOpen">Connexion</button>
+                <button class="tablinks" onclick="openTab(event, 'Register')">Inscription</button>
+            </div>
+            <div id="Login" class="tabcontent">
+                <h2>Connexion</h2>
+                <form id="login-form" action="auth.php" method="POST">
+                    <input type="email" name="email" placeholder="E-mail" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" name="login_btn">Se connecter</button>
+                </form>
+            </div>
+            <div id="Register" class="tabcontent">
+                <h2>Inscription</h2>
+                <form id="register-form" action="auth.php" method="POST">
+                    <input type="text" name="prenom" placeholder="Prénom" required>
+                    <input type="text" name="nom" placeholder="Nom" required>
+                    <input type="email" name="email" placeholder="E-mail" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" name="register">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <footer>
+        <p>&copy; 2023 - Tous droits réservés</p>
+    </footer>
 
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
