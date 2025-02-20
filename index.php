@@ -48,11 +48,11 @@ $totalPages = ceil($totalComments / $limit);
             <img src="./assets/img/R.jpeg" alt="Image 1" class="active">
             <img src="./assets/img/img6.jpg" alt="Image 6">
             <img src="./assets/img/img13.jpeg" alt="Image 7">
-            <img src="./assets/img/img14.jpg" alt="Image 8">
-            <img src="./assets/img/img8.jpg" alt="Image 9">
+            <img src="./assets/img/img16.jpg" alt="Image 8">
+            <img src="./assets/img/img15.jpg" alt="Image 9">
             <img src="./assets/img/img10.jpg" alt="Image 10">
-            <img src="./assets/img/mariage1.jpeg" alt="Image 11">
-            <img src="./assets/img/mariage2.jpeg" alt="Image 12">
+            <img src="./assets/img/img17.jpg" alt="Image 11">
+            <img src="./assets/img/img18.jpg" alt="Image 12">
         </div>
 
         <!-- Barre latérale des commentaires -->
