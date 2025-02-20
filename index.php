@@ -46,7 +46,7 @@ $totalPages = ceil($totalComments / $limit);
         <!-- Images qui défilent -->
         <div class="image-container">
             <img src="./assets/img/R.jpeg" alt="Image 1" class="active">
-            <img src="assets/img/img6.jpeg" alt="Image 2">
+            <img src="./assets/img/img6.jpeg" alt="Image 2">
             <img src="./assets/img/img7.jpeg" alt="Image 3">
             <img src="./assets/img/img8.jpeg" alt="Image 4">
             <img src="./assets/img/img9.jpeg" alt="Image 5">
