@@ -1,8 +1,15 @@
+@font-face {
+    font-family: 'Ballet';
+    src: url('./assets/fonts/Ballet-Regular-VariableFont_opsz.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Ballet', Arial, sans-serif; /* Appliquer la nouvelle police */
 }
 
 /* Conteneur principal */
@@ -13,42 +20,23 @@
 }
 
 /* Slideshow */
-.slideshow-container {
+.image-container {
     width: 75%;
     position: relative;
     overflow: hidden;
 }
 
-.slideshow-container img {
+.image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 0.5s ease-in-out; /* Vitesse de transition plus rapide */
 }
 
-.slideshow-container img.active {
+.image-container img.active {
     opacity: 1;
-}
-
-#prev, #next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-#prev { left: 10px; }
-#next { right: 10px; }
-
-#prev:hover, #next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Barre latérale des commentaires */
@@ -58,8 +46,6 @@
     padding: 20px;
     overflow-y: auto;
     background-size: cover; /* Couvrir tout le conteneur */
-    padding: 20px;
-    overflow-y: auto;
 }
 
 .sidebar-container h2 {
@@ -132,6 +118,7 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+    font-family: 'Ballet', Arial, sans-serif;
 }
 
 /* Header */
@@ -248,27 +235,6 @@ button:hover {
 
 .back-btn:hover, .logout-btn:hover {
     background-color: #555;
-}
-
-.image-container {
-    width: 70%; /* Ajuster la taille pour laisser plus de place à la barre latérale */
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    position: relative;
-}
-
-.image-container img {
-    width: 100%;
-    height: auto;
-    scroll-snap-align: center;
-    flex-shrink: 0;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.image-container img.active {
-    opacity: 1;
 }
 
 .pagination {

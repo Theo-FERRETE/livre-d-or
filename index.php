@@ -46,10 +46,10 @@ $totalPages = ceil($totalComments / $limit);
         <!-- Images qui défilent -->
         <div class="image-container">
             <img src="./assets/img/R.jpeg" alt="Image 1" class="active">
-            <img src="assets/img/mariage4.jpeg" alt="Image 2">
-            <img src="./assets/img/mariage5.jpg" alt="Image 3">
-            <img src="./assets/img/mariage6.jpeg" alt="Image 4">
-            <img src="./assets/img/mariage7.jpeg" alt="Image 5">
+            <img src="assets/img/img2.jpeg" alt="Image 2">
+            <img src="./assets/img/img3.jpeg" alt="Image 3">
+            <img src="./assets/img/img4.jpeg" alt="Image 4">
+            <img src="./assets/img/img5.jpeg" alt="Image 5">
             <img src="./assets/img/mariage8.jpeg" alt="Image 6">
             <img src="./assets/img/mariage1.jpeg" alt="Image 7">
             <img src="./assets/img/mariage2.jpeg" alt="Image 8">
@@ -129,7 +129,7 @@ $totalPages = ceil($totalComments / $limit);
             images[currentIndex].classList.add('active');
         }
 
-        setInterval(showNextImage, 3000);
+        setInterval(showNextImage, 2000); // Vitesse de défilement plus rapide
     </script>
 </body>
 </html>
