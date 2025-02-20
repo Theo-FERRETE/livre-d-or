@@ -51,7 +51,7 @@ $totalPages = ceil($totalComments / $limit);
             <img src="./assets/img/img16.jpg" alt="Image 8">
             <img src="./assets/img/img19.jpeg" alt="Image 9">
             <img src="./assets/img/img10.jpg" alt="Image 10">
-            <img src="./assets/img/img20.jpg" alt="Image 11">
+            <img src="./assets/img/img21.jpg" alt="Image 11">
             <img src="./assets/img/img18.jpg" alt="Image 12">
         </div>
 
