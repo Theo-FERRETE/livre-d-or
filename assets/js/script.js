@@ -28,25 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ouvrir l'onglet par défaut
     document.getElementById("defaultOpen").click();
 
-    // Slideshow
-    const slides = document.querySelectorAll(".slideshow-container img");
+    // Défilement automatique des images
+    const images = document.querySelectorAll('.image-container img');
     let currentIndex = 0;
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.opacity = i === index ? "1" : "0";
-        });
+    function showNextImage() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
     }
 
-    document.querySelector(".next").addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
-    });
-
-    document.querySelector(".prev").addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        showSlide(currentIndex);
-    });
-
-    showSlide(currentIndex); // Afficher la première image
+    setInterval(showNextImage, 3000); // Changer d'image toutes les 3 secondes
 });

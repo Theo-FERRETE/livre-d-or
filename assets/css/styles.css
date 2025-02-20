@@ -54,8 +54,9 @@
 
 /* Barre latérale des commentaires */
 .sidebar-container {
-    width: 25%;
-    background-color: #FFF8DC;
+    width: 30%; /* Ajuster la taille pour laisser plus de place à la barre latérale */
+    background: url('./assets/img/livreor_background.jpg') no-repeat center center; /* Ajouter l'image de fond */
+    background-size: cover; /* Couvrir tout le conteneur */
     padding: 20px;
     overflow-y: auto;
 }
@@ -137,14 +138,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5px 10px; /* Diminuer la taille du header */
     background-color: #333;
     color: white;
 }
 
 .logo img {
-    width: 100px; /* Réduire la taille du logo */
-    height: 100px; /* Assurer que le logo est carré */
+    width: 80px; /* Réduire la taille du logo */
+    height: 80px; /* Assurer que le logo est carré */
     border-radius: 50%; /* Rendre le logo rond */
 }
 
@@ -155,7 +156,7 @@ header {
 .login-btn {
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 5px 10px; /* Diminuer la taille du bouton */
     background-color: #444;
     border-radius: 5px;
     transition: background-color 0.3s;
@@ -234,4 +235,50 @@ button:hover {
 
 .back-btn:hover, .logout-btn:hover {
     background-color: #555;
+}
+
+.image-container {
+    width: 70%; /* Ajuster la taille pour laisser plus de place à la barre latérale */
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.image-container img.active {
+    opacity: 1;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    margin: 0 4px;
+    border-radius: 5px;
+    background-color: #ddd;
+}
+
+.pagination a.active {
+    background-color: #666;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ccc;
 }

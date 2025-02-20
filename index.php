@@ -1,9 +1,20 @@
 <?php
-require 'config.php';
+require 'classes/Database.php';
+require 'classes/Comment.php';
 
-// Récupérer les commentaires
-$stmt = $pdo->query("SELECT comment.*, user.prenom, user.nom FROM comment JOIN user ON comment.id_user = user.id ORDER BY comment.date DESC");
-$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+session_start();
+
+$db = new Database();
+$pdo = $db->getConnection();
+$comment = new Comment($pdo);
+
+$limit = 4;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$start = ($page - 1) * $limit;
+
+$comments = $comment->getCommentsWithPagination($start, $limit);
+$totalComments = $comment->getTotalComments();
+$totalPages = ceil($totalComments / $limit);
 ?>
 
 <!DOCTYPE html>
@@ -28,15 +39,13 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <div class="container">
-        <!-- Slideshow -->
-        <div class="slideshow-container">
-            <img src="./assets/img/mariage3.jpeg" alt="Image 1">
+        <!-- Images qui défilent -->
+        <div class="image-container">
+            <img src="./assets/img/mariage3.jpeg" alt="Image 1" class="active">
             <img src="assets/img/mariage4.jpeg" alt="Image 2">
             <img src="./assets/img/mariage5.jpg" alt="Image 3">
             <img src="./assets/img/mariage6.jpeg" alt="Image 4">
             <img src="./assets/img/mariage7.jpeg" alt="Image 5">
-            <button class="prev">&#10094;</button>
-            <button class="next">&#10095;</button>
         </div>
 
         <!-- Barre latérale des commentaires -->
@@ -51,7 +60,18 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </li>
                 <?php endforeach; ?>
             </ul>
-            <a href="commentaires.php">Ajouter un commentaire</a>
+            <?php if (isset($_SESSION['user'])): ?>
+                <a href="commentaires.php">Ajouter un commentaire</a>
+            <?php else: ?>
+                <a href="#" class="login-btn">Ajouter un commentaire</a>
+            <?php endif; ?>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?= $i ?>" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>
+                <?php endfor; ?>
+            </div>
         </div>
     </div>
 
@@ -89,5 +109,18 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 
     <script src="./assets/js/script.js"></script>
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.image-container img');
+        const totalImages = images.length;
+
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % totalImages;
+            images[currentIndex].classList.add('active');
+        }
+
+        setInterval(showNextImage, 3000);
+    </script>
 </body>
 </html>

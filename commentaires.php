@@ -1,19 +1,25 @@
 <?php
-require 'config.php';
+require 'classes/Database.php';
+require 'classes/Comment.php';
+
+session_start();
 
 if (!isset($_SESSION['user'])) {
     header('Location: index.php');
     exit();
 }
 
+$db = new Database();
+$pdo = $db->getConnection();
+$comment = new Comment($pdo);
+
 // Ajouter un commentaire
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
-    $comment = htmlspecialchars($_POST['comment']);
+    $commentText = htmlspecialchars($_POST['comment']);
     $id_user = $_SESSION['user']['id'];
 
-    if (!empty($comment)) {
-        $stmt = $pdo->prepare("INSERT INTO comment (comment, id_user) VALUES (?, ?)");
-        $stmt->execute([$comment, $id_user]);
+    if (!empty($commentText)) {
+        $comment->addComment($commentText, $id_user);
         header("Location: commentaires.php");
         exit();
     } else {
@@ -24,8 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
 // Supprimer un commentaire
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $stmt = $pdo->prepare("DELETE FROM comment WHERE id = ? AND id_user = ?");
-    $stmt->execute([$id, $_SESSION['user']['id']]);
+    $comment->deleteComment($id, $_SESSION['user']['id']);
     header("Location: commentaires.php");
     exit();
 }
@@ -33,15 +38,12 @@ if (isset($_GET['delete'])) {
 // Modifier un commentaire
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
-    $stmt = $pdo->prepare("SELECT * FROM comment WHERE id = ? AND id_user = ?");
-    $stmt->execute([$id, $_SESSION['user']['id']]);
-    $comment = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($comment) {
+    $commentData = $comment->getCommentById($id, $_SESSION['user']['id']);
+    if ($commentData) {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_comment'])) {
             $newComment = htmlspecialchars($_POST['comment']);
             if (!empty($newComment)) {
-                $stmt = $pdo->prepare("UPDATE comment SET comment = ? WHERE id = ?");
-                $stmt->execute([$newComment, $id]);
+                $comment->updateComment($id, $newComment);
                 header("Location: commentaires.php");
                 exit();
             } else {
@@ -92,10 +94,10 @@ if (isset($_GET['edit'])) {
         <?php endforeach; ?>
     </ul>
 
-    <?php if (isset($_GET['edit']) && $comment): ?>
+    <?php if (isset($_GET['edit']) && $commentData): ?>
         <h2>Modifier le commentaire</h2>
         <form method="POST">
-            <textarea name="comment"><?= htmlspecialchars($comment['comment']) ?></textarea>
+            <textarea name="comment"><?= htmlspecialchars($commentData['comment']) ?></textarea>
             <button type="submit" name="edit_comment">Modifier</button>
         </form>
     <?php endif; ?>
