@@ -54,6 +54,5 @@ Le message est sauvegardé et s'affiche instantanément
 Auteur
 
 Théo Ferrete
-Oussama Halima Filali 
-Dylan DUFOUR
+
 
