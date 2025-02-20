@@ -53,11 +53,9 @@ $totalPages = ceil($totalComments / $limit);
             <img src="./assets/img/mariage8.jpeg" alt="Image 6">
             <img src="./assets/img/mariage1.jpeg" alt="Image 7">
             <img src="./assets/img/mariage2.jpeg" alt="Image 8">
-            
         </div>
 
         <!-- Barre latérale des commentaires -->
-         
         <div class="sidebar-container">
             <h2>Commentaires</h2>
             <ul>

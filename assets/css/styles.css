@@ -15,15 +15,17 @@
 /* Conteneur principal */
 .container {
     display: flex;
+    flex-direction: column;
     height: 100vh;
     background-color: #c6c4ac;
 }
 
 /* Slideshow */
 .image-container {
-    width: 75%;
+    width: 100%;
     position: relative;
     overflow: hidden;
+    flex: 1;
 }
 
 .image-container img {
@@ -41,7 +43,7 @@
 
 /* Barre latérale des commentaires */
 .sidebar-container {
-    width: 25%; /* Ajuster la taille pour laisser plus de place à la barre latérale */
+    width: 100%;
     background-color: #c6c4ac;
     padding: 20px;
     overflow-y: auto;
@@ -91,16 +93,18 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.1); /* Réduire l'opacité pour un effet glassmorphism */
+    backdrop-filter: blur(10px); /* Ajouter un flou pour l'effet glassmorphism */
 }
 
 .modal-content {
-    background: white;
+    background: rgba(255, 255, 255, 0.8); /* Réduire l'opacité pour un effet glassmorphism */
     margin: 10% auto;
     padding: 20px;
     width: 90%;
     max-width: 400px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .close {
@@ -260,4 +264,48 @@ button:hover {
 
 .pagination a:hover:not(.active) {
     background-color: #ccc;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .image-container {
+        width: 75%;
+    }
+
+    .sidebar-container {
+        width: 25%;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar-container {
+        order: 2; /* Placer les commentaires en bas de la page */
+    }
+
+    .image-container {
+        order: 1; /* Placer le slideshow en haut de la page */
+    }
+
+    .login-btn {
+        padding: 2px 4px; /* Réduire davantage la taille du bouton sur petit écran */
+        font-size: 12px; /* Réduire davantage la taille de la police du bouton sur petit écran */
+    }
+
+    .logo img {
+        width: 30px; /* Réduire davantage la taille du logo sur petit écran */
+        height: 30px; /* Assurer que le logo est carré sur petit écran */
+    }
+
+    .logout-btn {
+        padding: 2px 4px; /* Réduire davantage la taille du bouton de déconnexion sur petit écran */
+        font-size: 12px; /* Réduire davantage la taille de la police du bouton de déconnexion sur petit écran */
+    }
 }
