@@ -47,8 +47,8 @@ $totalPages = ceil($totalComments / $limit);
         <div class="image-container">
             <img src="./assets/img/R.jpeg" alt="Image 1" class="active">
             <img src="./assets/img/img6.jpg" alt="Image 6">
-            <img src="./assets/img/img7.jpg" alt="Image 7">
-            <img src="./assets/img/img8.jpg" alt="Image 8">
+            <img src="./assets/img/img11.jpg" alt="Image 7">
+            <img src="./assets/img/img12.jpg" alt="Image 8">
             <img src="./assets/img/img9.jpeg" alt="Image 9">
             <img src="./assets/img/img10.jpg" alt="Image 10">
             <img src="./assets/img/mariage1.jpeg" alt="Image 11">
