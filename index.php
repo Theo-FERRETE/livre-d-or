@@ -21,6 +21,7 @@ $totalPages = ceil($totalComments / $limit);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -28,6 +29,9 @@ $totalPages = ceil($totalComments / $limit);
     <header>
         <div class="logo">
             <img src="./assets/img/logo1.webp" alt="Logo">
+        </div>
+        <div class="header-center">
+            <img src="./assets/img/textname.png" alt="Text Logo">
         </div>
         <div class="login-button">
             <?php if (isset($_SESSION['user'])): ?>
@@ -41,14 +45,19 @@ $totalPages = ceil($totalComments / $limit);
     <div class="container">
         <!-- Images qui défilent -->
         <div class="image-container">
-            <img src="./assets/img/mariage3.jpeg" alt="Image 1" class="active">
+            <img src="./assets/img/R.jpeg" alt="Image 1" class="active">
             <img src="assets/img/mariage4.jpeg" alt="Image 2">
             <img src="./assets/img/mariage5.jpg" alt="Image 3">
             <img src="./assets/img/mariage6.jpeg" alt="Image 4">
             <img src="./assets/img/mariage7.jpeg" alt="Image 5">
+            <img src="./assets/img/mariage8.jpeg" alt="Image 6">
+            <img src="./assets/img/mariage1.jpeg" alt="Image 7">
+            <img src="./assets/img/mariage2.jpeg" alt="Image 8">
+            
         </div>
 
         <!-- Barre latérale des commentaires -->
+         
         <div class="sidebar-container">
             <h2>Commentaires</h2>
             <ul>
@@ -86,18 +95,18 @@ $totalPages = ceil($totalComments / $limit);
             <div id="Login" class="tabcontent">
                 <h2>Connexion</h2>
                 <form id="login-form" action="auth.php" method="POST">
-                    <input type="email" name="email" placeholder="E-mail" required>
-                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <input type="email" name="email" placeholder="E-mail" required autocomplete="email">
+                    <input type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password">
                     <button type="submit" name="login_btn">Se connecter</button>
                 </form>
             </div>
             <div id="Register" class="tabcontent">
                 <h2>Inscription</h2>
                 <form id="register-form" action="auth.php" method="POST">
-                    <input type="text" name="prenom" placeholder="Prénom" required>
-                    <input type="text" name="nom" placeholder="Nom" required>
-                    <input type="email" name="email" placeholder="E-mail" required>
-                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <input type="text" name="prenom" placeholder="Prénom" required autocomplete="given-name">
+                    <input type="text" name="nom" placeholder="Nom" required autocomplete="family-name">
+                    <input type="email" name="email" placeholder="E-mail" required autocomplete="email">
+                    <input type="password" name="password" placeholder="Mot de passe" required autocomplete="new-password">
                     <button type="submit" name="register">S'inscrire</button>
                 </form>
             </div>

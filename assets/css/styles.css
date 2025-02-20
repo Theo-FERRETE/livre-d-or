@@ -1,4 +1,3 @@
-/* Reset CSS */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +9,7 @@
 .container {
     display: flex;
     height: 100vh;
-    background-color: #222;
+    background-color: #c6c4ac;
 }
 
 /* Slideshow */
@@ -54,8 +53,10 @@
 
 /* Barre latérale des commentaires */
 .sidebar-container {
-    width: 30%; /* Ajuster la taille pour laisser plus de place à la barre latérale */
-    background: url('./assets/img/livreor_background.jpg') no-repeat center center; /* Ajouter l'image de fond */
+    width: 25%; /* Ajuster la taille pour laisser plus de place à la barre latérale */
+    background-color: #c6c4ac;
+    padding: 20px;
+    overflow-y: auto;
     background-size: cover; /* Couvrir tout le conteneur */
     padding: 20px;
     overflow-y: auto;
@@ -139,14 +140,26 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px; /* Diminuer la taille du header */
-    background-color: #333;
+    background-color: #c6c4ac;
     color: white;
+    position: relative; /* Ajouter cette ligne */
 }
 
 .logo img {
-    width: 80px; /* Réduire la taille du logo */
-    height: 80px; /* Assurer que le logo est carré */
+    width: 50px; /* Réduire la taille du logo */
+    height: 50px; /* Assurer que le logo est carré */
     border-radius: 50%; /* Rendre le logo rond */
+}
+
+.header-center {
+    position: absolute; /* Ajouter cette ligne */
+    left: 50%; /* Ajouter cette ligne */
+    transform: translateX(-50%); /* Ajouter cette ligne */
+}
+
+.header-center img {
+    width: 200px; /* Ajuster la taille du logo textname */
+    height: auto;
 }
 
 .login-button {
