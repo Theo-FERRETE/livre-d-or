@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `comment` text COLLATE utf8mb4_general_ci NOT NULL,
   `id_user` int NOT NULL,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
